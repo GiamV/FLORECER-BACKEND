@@ -1,0 +1,5 @@
+package com.idat.florecer.entity;
+
+public class DetalleGuiaEntrada {
+
+}

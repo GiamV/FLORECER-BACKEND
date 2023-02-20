@@ -1,0 +1,188 @@
+
+package com.idat.laterraza.test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+
+import com.idat.laterraza.entity.Rol;
+import com.idat.laterraza.entity.TipoPago;
+import com.idat.laterraza.entity.Usuario;
+import com.idat.florecer.dao.ICabeceraVentaDao;
+import com.idat.laterraza.entity.CabeceraVenta;
+
+import java.util.Date;
+        
+@DataJpaTest
+@AutoConfigureTestDatabase(replace=Replace.NONE)
+public class CabeceraVentaJpaTest {
+    
+    private static CabeceraVenta objcabecera;
+    
+    @Autowired
+    private ICabeceraVentaDao cabeceraService;
+    
+    @BeforeAll
+    public static void Inicio(){
+        objcabecera= new CabeceraVenta();
+        System.out.print("BeforeAll --> Inicio");
+    }
+    
+    @AfterAll
+    public static void Final(){
+        objcabecera= null;
+        System.out.println("AfterAll --> Final()");
+    }
+    
+    @Test 
+    public void Mensaje(){
+        System.out.println("Prueba Inicial");
+        System.out.println("@Test --> PruebaInicial");
+    }
+    
+    @Test 
+    public void findAllTest(){
+        Iterable<CabeceraVenta> categoria = cabeceraService.findAll();
+        assertNotNull(categoria);
+    }
+    
+    
+    @Test 
+    public void findById(){
+        long id=1;
+        Optional<CabeceraVenta> categoria = cabeceraService.findById(id);
+        assertNotNull(categoria);
+    }
+    
+    @Test 
+    @Rollback(false)
+    public void addTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        objcabecera.setBruto(0);
+        objcabecera.setEstado(1);
+        objcabecera.setFechamat(fecha);
+        objcabecera.setIdCabecera(Long.valueOf(1));
+        objcabecera.setIgv(0);
+        objcabecera.setNeto(0);
+        objcabecera.setTipoCabecera("Tipo cabecera");
+        objcabecera.setTipoPago(tipopago);
+        objcabecera.setUsuario(usuario);
+        
+        CabeceraVenta cabe = cabeceraService.save(objcabecera);
+        assertNotNull(cabe);
+    }
+    
+    @Test 
+    @Rollback(false)
+    public void updateTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        objcabecera.setBruto(0);
+        objcabecera.setEstado(1);
+        objcabecera.setFechamat(fecha);
+        objcabecera.setIdCabecera(Long.valueOf(1));
+        objcabecera.setIgv(0);
+        objcabecera.setNeto(0);
+        objcabecera.setTipoCabecera("Tipo cabecera");
+        objcabecera.setTipoPago(tipopago);
+        objcabecera.setUsuario(usuario);
+        
+        CabeceraVenta categoria = cabeceraService.save(objcabecera);
+        assertNotNull(categoria);
+    }
+    
+
+    @Test 
+    @Rollback(false)
+    public void deleteTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        objcabecera.setBruto(0);
+        objcabecera.setEstado(1);
+        objcabecera.setFechamat(fecha);
+        objcabecera.setIdCabecera(Long.valueOf(1));
+        objcabecera.setIgv(0);
+        objcabecera.setNeto(0);
+        objcabecera.setTipoCabecera("Tipo cabecera");
+        objcabecera.setTipoPago(tipopago);
+        objcabecera.setUsuario(usuario);
+        
+        CabeceraVenta categoria = cabeceraService.save(objcabecera);
+        assertNotNull(categoria);
+    }
+    
+}

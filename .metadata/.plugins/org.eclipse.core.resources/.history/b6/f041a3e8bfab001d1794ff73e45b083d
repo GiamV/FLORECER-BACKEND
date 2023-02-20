@@ -1,0 +1,263 @@
+
+package com.idat.laterraza.test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.Rollback;
+
+import com.idat.laterraza.entity.Categoria;
+import com.idat.laterraza.entity.Producto;
+import com.idat.laterraza.entity.Rol;
+import com.idat.laterraza.entity.TipoPago;
+import com.idat.laterraza.entity.Usuario;
+import com.idat.florecer.dao.IDetalleVentaDao;
+import com.idat.laterraza.entity.CabeceraVenta;
+import com.idat.laterraza.entity.DetalleVenta;
+
+import java.util.Date;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace=Replace.NONE)
+public class DetalleVentaJpaTest {
+    
+    private static DetalleVenta objdetalle;
+    
+    @Autowired
+    private IDetalleVentaDao detalleService;    
+    
+    @BeforeAll
+    public static void Inicio(){
+        objdetalle= new DetalleVenta();
+        System.out.print("BeforeAll --> Inicio");
+    }
+    
+    @AfterAll
+    public static void Final(){
+        objdetalle= null;
+        System.out.println("AfterAll --> Final()");
+    }
+    
+    @Test 
+    public void Mensaje(){
+        System.out.println("Prueba Inicial");
+        System.out.println("@Test --> PruebaInicial");
+    }
+    
+    @Test 
+    public void findAllTest(){
+        Iterable<DetalleVenta> categoria = detalleService.findAll();
+        assertNotNull(categoria);
+    }
+    
+    
+    @Test 
+    public void findById(){
+        long id=1;
+        Optional<DetalleVenta> categoria = detalleService.findById(id);
+        assertNotNull(categoria);
+    }
+    
+    
+    @Test 
+    @Rollback(false)
+    public void addTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        CabeceraVenta cabe=new CabeceraVenta();
+        
+        cabe.setBruto(0);
+        cabe.setEstado(1);
+        cabe.setFechamat(fecha);
+        cabe.setIdCabecera(Long.valueOf(1));
+        cabe.setIgv(0);
+        cabe.setNeto(0);
+        cabe.setTipoCabecera("Tipo cabecera");
+        cabe.setTipoPago(tipopago);
+        cabe.setUsuario(usuario);
+        
+        Categoria cate =new Categoria();
+        cate.setCategoria("categoria");
+        cate.setEstado(0);
+        cate.setIdCategoria(Long.valueOf(1));
+        
+        Producto prod=new Producto();
+        prod.setCategoria(cate);
+        prod.setDescripcion("descripcion");
+        prod.setEstado(0);
+        prod.setIdProducto(Long.valueOf(1));
+        prod.setImagen("imagen");
+        prod.setPrecio(0);
+        prod.setProducto("producto");
+        
+        objdetalle.setCabecera(cabe);
+        objdetalle.setCantidad(0);
+        objdetalle.setEstado(0);
+        objdetalle.setIdDetalleVenta(Long.valueOf(1));
+        objdetalle.setPrecio(0);
+        objdetalle.setProducto(prod);
+        
+        
+        DetalleVenta detalle = detalleService.save(objdetalle);
+        assertNotNull(detalle);
+    }
+    
+    @Test 
+    @Rollback(false)
+    public void updateTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        CabeceraVenta cabe=new CabeceraVenta();
+        
+        cabe.setBruto(0);
+        cabe.setEstado(1);
+        cabe.setFechamat(fecha);
+        cabe.setIdCabecera(Long.valueOf(1));
+        cabe.setIgv(0);
+        cabe.setNeto(0);
+        cabe.setTipoCabecera("Tipo cabecera");
+        cabe.setTipoPago(tipopago);
+        cabe.setUsuario(usuario);
+        
+        Categoria cate =new Categoria();
+        cate.setCategoria("categoria");
+        cate.setEstado(0);
+        cate.setIdCategoria(Long.valueOf(1));
+        
+        Producto prod=new Producto();
+        prod.setCategoria(cate);
+        prod.setDescripcion("descripcion");
+        prod.setEstado(0);
+        prod.setIdProducto(Long.valueOf(1));
+        prod.setImagen("imagen");
+        prod.setPrecio(0);
+        prod.setProducto("producto");
+        
+        objdetalle.setCabecera(cabe);
+        objdetalle.setCantidad(0);
+        objdetalle.setEstado(0);
+        objdetalle.setIdDetalleVenta(Long.valueOf(1));
+        objdetalle.setPrecio(0);
+        objdetalle.setProducto(prod);
+        
+        
+        DetalleVenta detalle = detalleService.save(objdetalle);
+        assertNotNull(detalle);
+    }
+    
+    @Test 
+    @Rollback(false)
+    public void deleteTest(){
+        Date fecha=new Date();
+        
+        TipoPago tipopago=new TipoPago();
+        tipopago.setIdTipoPago(Long.valueOf(1));
+        tipopago.setTipoPago("efectivo");
+        
+        Rol rol = new Rol();
+        rol.setIdRol(Long.valueOf(1));
+        rol.setRol("usuario");
+        
+        Usuario usuario=new Usuario();
+        usuario.setApellido("apellido");
+        usuario.setContrasena("contrasena");
+        usuario.setDireccion("direccion");
+        usuario.setDni("12345678");
+        usuario.setEstado(0);
+        usuario.setIdUsuario(Long.valueOf(1));
+        usuario.setNombre("nombre");
+        usuario.setRol(rol);
+        usuario.setSexo("sexo");
+        usuario.setTelefono("987654321");
+        usuario.setUsuario("usuario");
+        
+        CabeceraVenta cabe=new CabeceraVenta();
+        
+        cabe.setBruto(0);
+        cabe.setEstado(1);
+        cabe.setFechamat(fecha);
+        cabe.setIdCabecera(Long.valueOf(1));
+        cabe.setIgv(0);
+        cabe.setNeto(0);
+        cabe.setTipoCabecera("Tipo cabecera");
+        cabe.setTipoPago(tipopago);
+        cabe.setUsuario(usuario);
+        
+        Categoria cate =new Categoria();
+        cate.setCategoria("categoria");
+        cate.setEstado(0);
+        cate.setIdCategoria(Long.valueOf(1));
+        
+        Producto prod=new Producto();
+        prod.setCategoria(cate);
+        prod.setDescripcion("descripcion");
+        prod.setEstado(0);
+        prod.setIdProducto(Long.valueOf(1));
+        prod.setImagen("imagen");
+        prod.setPrecio(0);
+        prod.setProducto("producto");
+        
+        objdetalle.setCabecera(cabe);
+        objdetalle.setCantidad(0);
+        objdetalle.setEstado(0);
+        objdetalle.setIdDetalleVenta(Long.valueOf(1));
+        objdetalle.setPrecio(0);
+        objdetalle.setProducto(prod);
+        
+        
+        DetalleVenta detalle = detalleService.save(objdetalle);
+        assertNotNull(detalle);
+    }
+    
+}
