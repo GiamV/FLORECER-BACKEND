@@ -19,6 +19,8 @@ public class Proveedor {
 	private String correo;
 	private String nombreComercial;
 	private String Descripcion;
+	private String imagen;
+	
 	public Long getIdProveedor() {
 		return idProveedor;
 	}
@@ -55,10 +57,15 @@ public class Proveedor {
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
 	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 	
 }
