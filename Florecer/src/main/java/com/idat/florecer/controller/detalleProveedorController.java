@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.idat.florecer.entity.DetalleProveedor;
 import com.idat.florecer.service.IDetalleProveedorService;
+import com.idat.florecer.serviceR.DetaProvServiceIm;
 
 @CrossOrigin(origins= {"http://localhost/4200"})
 @RestController
@@ -22,17 +23,24 @@ import com.idat.florecer.service.IDetalleProveedorService;
 public class detalleProveedorController {
 	@Autowired
 	private IDetalleProveedorService detalleprovService;
+	@Autowired
+	private DetaProvServiceIm DetaProvSerR;
 	
 	//LISTAR DETALLES
 		@GetMapping("/detallesProv")
 		public List<DetalleProveedor> listar(){
 			return detalleprovService.findAll();
 		}
-	//LISTAR DET PROVEEDORES X ID
+	//LISTAR DET PROVEEDOR X ID
 		@GetMapping("/detallesProv/{id}")
 		public DetalleProveedor Detalle_Proveedor(@PathVariable Long id) {
 			return detalleprovService.findById(id);
 		}
+		//LISTAR DET PROVEEDORES X ID
+				@GetMapping("/detallesProvid/{id}")
+				public List<DetalleProveedor> ProveedoresID(@PathVariable Long id) {
+					return DetaProvSerR.findByIDP(id);
+			}
 	//CREAR NUEVO DETALLE PROVEEDOR
 		@PostMapping("/detallesProvnew")
 		public DetalleProveedor detprovanew(@RequestBody DetalleProveedor detalleProveedor) {

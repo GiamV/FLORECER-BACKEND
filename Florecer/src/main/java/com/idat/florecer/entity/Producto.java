@@ -19,8 +19,10 @@ public class Producto {
 	private String imagen;
 	private String descripcion;
 	private float precio;
+	private float precioCompra;
 	private int estado;
 	private int stock;
+	
 	@ManyToOne
 	@JoinColumn(name="IdCategoria")
 	Categoria categoria;
@@ -57,6 +59,7 @@ public class Producto {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+	
 	public int getEstado() {
 		return estado;
 	}
@@ -77,6 +80,12 @@ public class Producto {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public float getPrecioCompra() {
+		return precioCompra;
+	}
+	public void setPrecioCompra(float precioCompra) {
+		this.precioCompra = precioCompra;
 	}
 	
 	

@@ -26,6 +26,10 @@ public class DetalleGuiaEntrada {
 	@ManyToOne
 	@JoinColumn(name="IdGuiaEntrada")
 	GuiaEntrada guia_Entrada;
+	
+	@ManyToOne
+	@JoinColumn(name="idProveedor")
+	Proveedor proveedor;
 
 	public Long getIdDetalleGuia() {
 		return idDetalleGuia;
@@ -65,6 +69,15 @@ public class DetalleGuiaEntrada {
 
 	public void setGuia_Entrada(GuiaEntrada guia_Entrada) {
 		this.guia_Entrada = guia_Entrada;
+	}
+	
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 
 	public static long getSerialversionuid() {
