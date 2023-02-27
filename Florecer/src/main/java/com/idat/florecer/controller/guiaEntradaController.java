@@ -84,6 +84,8 @@ public class guiaEntradaController {
 	
 	
 	
+	
+	
 	//CAMBIAR ESTADO DE CARRITO A VENTA
 		@PutMapping("/ComprarCabecera/{idGuia}")
 		public void Comprar(@PathVariable Long idGuia,@RequestBody GuiaEntrada cabecera) {
