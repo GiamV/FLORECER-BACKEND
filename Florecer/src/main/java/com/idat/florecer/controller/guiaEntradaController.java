@@ -47,7 +47,6 @@ public class guiaEntradaController {
 		guiaEntradaActual.setFechamat(guiaEntrada.getFechamat());
 		guiaEntradaActual.setEstado(guiaEntrada.getEstado());
 		guiaEntradaActual.setUsuario(guiaEntrada.getUsuario());
-		guiaEntradaActual.setProveedor(guiaEntrada.getProveedor());
 		
 		guiaEntradaService.save(guiaEntradaActual);
 		return guiaEntradaService .findById(id);	
