@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.idat.florecer.entity.CabeceraVenta;
+import com.idat.florecer.entity.DetalleGuiaEntrada;
+import com.idat.florecer.entity.DetalleVenta;
 import com.idat.florecer.entity.GuiaEntrada;
+import com.idat.florecer.entity.Producto;
 import com.idat.florecer.service.IGuiaEntradaService;
+import com.idat.florecer.service.IProductoService;
+import com.idat.florecer.serviceR.DetaGuiaServiceIm;
+import com.idat.florecer.serviceR.GuiaEmtradaServiceIm;
 
 @CrossOrigin(origins= {"http://localhost/4200"})
 @RestController
@@ -22,17 +29,27 @@ import com.idat.florecer.service.IGuiaEntradaService;
 public class guiaEntradaController {
 	@Autowired
 	private IGuiaEntradaService guiaEntradaService;
+	@Autowired
+	private DetaGuiaServiceIm guiaService;
+	@Autowired
+	private IProductoService productoService;
+	
+	@Autowired
+	private GuiaEmtradaServiceIm guiaEntraS;
 	
 	//LISTAR GUIA DE ENTRADAS
 	@GetMapping("/guiaEntradas")
 	public List<GuiaEntrada> listar(){
 		return guiaEntradaService.findAll();
 	}
+	
 	//LISTAR GUIA DE ENTRADAS X ID
 	@GetMapping("/guiaEntradas/{id}")
 	public GuiaEntrada GuiaEntradaxId(@PathVariable Long id) {
 		return guiaEntradaService.findById(id);
 	}
+	
+	
 	//CREAR NUEVA GUIA DE ENTRADA
 	@PostMapping("/guiaEntradaNew")
 	public GuiaEntrada GuiaEntradarnew(@RequestBody GuiaEntrada guiaEntrada) {
@@ -64,4 +81,31 @@ public class guiaEntradaController {
 		guiaEntradaService.save(guiaEntradaActual);
 		
 	}
+	
+	
+	
+	//CAMBIAR ESTADO DE CARRITO A VENTA
+		@PutMapping("/ComprarCabecera/{idGuia}")
+		public void Comprar(@PathVariable Long idGuia,@RequestBody GuiaEntrada cabecera) {
+			GuiaEntrada guia=guiaEntradaService.findById(idGuia);
+			System.out.println("====================================");
+			System.out.println(guia.getUsuario().getIdUsuario()+"       "+idGuia);
+
+			System.out.println("====================================");
+			List<DetalleGuiaEntrada> listaDetalle2=guiaService.findByCaU(guia.getIdGuiaEntrada());
+			for(int i=0;i<listaDetalle2.size();i++) {
+				Producto productoActual=productoService.findById(listaDetalle2.get(i).getProducto().getIdProducto());
+				productoActual.setStock(productoActual.getStock()+listaDetalle2.get(i).getCantidad());
+				productoService.save(productoActual);
+				
+				//cabeceraService.findById(listaDetalle.get(i).getCabecera().getIdCabecera());
+				
+			}
+			
+
+			guiaEntraS.CompraCabe(idGuia,guia.getUsuario().getIdUsuario());
+			//cabeceraregister(cabe.getUsuario().getIdUsuario());	
+		}
+	
+	
 }
