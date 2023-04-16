@@ -10,6 +10,6 @@ import com.idat.florecer.entity.DetalleGuiaEntrada;
 
 
 public interface IDetalleGuiaRepository extends JpaRepository<DetalleGuiaEntrada, Long> { 
-	@Query(value= "{call consultadetventa(:xcodguia)}",nativeQuery=true)
+	@Query(value= "{call consultadetcompra(:xcodguia)}",nativeQuery=true)
 	List<DetalleGuiaEntrada> findByCabV(@Param("xcodguia")Long xcodguia);
 }

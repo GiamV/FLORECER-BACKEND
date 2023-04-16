@@ -20,6 +20,7 @@ public class Proveedor {
 	private String nombreComercial;
 	private String Descripcion;
 	private String imagen;
+	private int estado;
 	
 	public Long getIdProveedor() {
 		return idProveedor;
@@ -63,6 +64,13 @@ public class Proveedor {
 	}
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+	
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

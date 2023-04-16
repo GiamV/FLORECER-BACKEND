@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.idat.florecer.serviceR.DetaVServiceIm"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.repository.DetaProvRepository"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.entity.DetalleProveedor"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.serviceR.DetaProvServiceIm"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.repository.IDetalleGuiaRepository"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.entity.DetalleGuiaEntrada"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.repository.IGuiaEntradaRepository"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.serviceR.GuiaEmtradaServiceIm"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.entity.GuiaEntrada"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.serviceR.DetaGuiaServiceIm"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.service.IDetalleVentaService"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.service.ICabeceraVentaService"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.service.IUsuarioService"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.serviceR.UsuarioServiceIm"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.entity.DetalleVenta"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
+    <fullyQualifiedTypeName name="io.swagger.v3.oas.annotations.parameters.RequestBody"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="javax.mail.MessagingException"/>
+    <fullyQualifiedTypeName name="javax.mail.internet.MimeMessage"/>
+    <fullyQualifiedTypeName name="org.springframework.mail.javamail.MimeMessageHelper"/>
+    <fullyQualifiedTypeName name="ch.qos.logback.core.Context"/>
+    <fullyQualifiedTypeName name="javax.naming.Context"/>
+    <fullyQualifiedTypeName name="com.idat.florecer.entity.CabeceraVenta"/>
+    <fullyQualifiedTypeName name="javax.validation.MessageInterpolator.Context"/>
+    <fullyQualifiedTypeName name="org.thymeleaf.context.Context"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Qualifier"/>
+    <fullyQualifiedTypeName name="org.thymeleaf.TemplateEngine"/>
+    <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
 </qualifiedTypeNameHistroy>

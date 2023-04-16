@@ -36,6 +36,18 @@ public class CabeVServiceIm {
 	public List<CabeceraVenta> ListCabV() {
 		return (List<CabeceraVenta>) CabeceraRepo.ListCabV();
 	}
+	public List<CabeceraVenta> ListCabPend() {
+		return (List<CabeceraVenta>) CabeceraRepo.ListCabPendiente();
+	}
+	public List<CabeceraVenta> ListCabTodos() {
+		return (List<CabeceraVenta>) CabeceraRepo.ListCabTodos();
+	}
+	public List<Object> ConsultaVentas() {
+		return (List<Object>) CabeceraRepo.ConsultaVentas();
+	}
 	
+	public List<Object> ContarVentas() {
+		return (List<Object>) CabeceraRepo.ContarVentas();
+	}
 
 }

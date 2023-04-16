@@ -67,6 +67,15 @@ public class cabeceraController {
 		public CabeceraVenta getbyidUser (@PathVariable Long id) {
 			return cabeService.getCabe(id);
 		}
+		
+		@GetMapping("/consultaventa")
+		public List<Object> ConsultaVenta(){
+			return cabeService.ConsultaVentas();
+		}
+		@GetMapping("/contarventa")
+		public List<Object> ContarVenta(){
+			return cabeService.ContarVentas();
+		}
 	
 	//ACTUALIZAR CABECERA
 	@PutMapping("/cabeceraupdate/{id}")
@@ -79,6 +88,15 @@ public class cabeceraController {
 		cabeceraActual.setEstado(cabecera.getEstado());
 		cabeceraActual.setTipoPago(cabecera.getTipoPago());
 		cabeceraActual.setTipoCabecera(cabecera.getTipoCabecera());
+		
+		cabeceraService.save(cabeceraActual);
+		return cabeceraService.findById(id);
+	}
+	
+	@PutMapping("/cabeceratipo/{id}")
+	public CabeceraVenta actualizarTipo(@RequestBody CabeceraVenta cabecera,@PathVariable Long id) {
+		CabeceraVenta cabeceraActual=cabeceraService.findById(id);
+		cabeceraActual.setTipoCabecera("Venta");
 		
 		cabeceraService.save(cabeceraActual);
 		return cabeceraService.findById(id);
@@ -143,6 +161,14 @@ public class cabeceraController {
 	@GetMapping("/cabeceratodos")
 	public List<CabeceraVenta> listarTodosC(){
 		return cabeService.ListCabV();
+	}
+	@GetMapping("/cabeceratodosp")
+	public List<CabeceraVenta> listarTodosCP(){
+		return cabeService.ListCabPend();
+	}
+	@GetMapping("/cabeceratodosfull")
+	public List<CabeceraVenta> listarTodosCfull(){
+		return cabeService.ListCabTodos();
 	}
 	
 	//ELIMINAR CABECERA

@@ -15,8 +15,8 @@ public class DetaGuiaServiceIm {
 	@Autowired
 	IDetalleGuiaRepository DetalleGuiaRepo;
 	
-	public List<DetalleGuiaEntrada> findByCaU(Long codcab) {
-		return (List<DetalleGuiaEntrada>) DetalleGuiaRepo.findByCabV(codcab);
+	public List<DetalleGuiaEntrada> findBycodGui(Long codgui) {
+		return (List<DetalleGuiaEntrada>) DetalleGuiaRepo.findByCabV(codgui);
 	}
 
 }

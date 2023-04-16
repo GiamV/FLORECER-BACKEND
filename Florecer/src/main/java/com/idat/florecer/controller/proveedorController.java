@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.idat.florecer.entity.Producto;
 import com.idat.florecer.entity.Proveedor;
 import com.idat.florecer.service.IProveedorService;
 
@@ -48,6 +49,7 @@ public class proveedorController {
 				proveedorActual.setCorreo(proveedor.getCorreo());
 				proveedorActual.setNombreComercial(proveedor.getNombreComercial());
 				proveedorActual.setDescripcion(proveedor.getDescripcion());
+				proveedorActual.setEstado(proveedor.getEstado());
 				
 				provService.save(proveedorActual);
 				return provService .findById(id);	
@@ -56,5 +58,17 @@ public class proveedorController {
 			@DeleteMapping("/ProveedorDelete/{id}")
 			public void delete(@PathVariable Long id) {
 				provService.eliminarProveedor(id);
+			}
+			
+			@DeleteMapping("/proveedorestado/{id}")
+			public void deleteestado(@PathVariable Long id) {
+				Proveedor proveedorActual=provService.findById(id);
+				if(proveedorActual.getEstado()==1) {
+					proveedorActual.setEstado(0);
+				}else {
+					proveedorActual.setEstado(1);
+				}
+				
+				provService.save(proveedorActual);
 			}
 }

@@ -78,11 +78,13 @@ public class productoController {
 	@DeleteMapping("/productoestado/{id}")
 	public void deleteestado(@PathVariable Long id) {
 		Producto productoActual=productoService.findById(id);
-		productoActual.setEstado(0);
+		if(productoActual.getEstado()==1) {
+			productoActual.setEstado(0);
+		}else {
+			productoActual.setEstado(1);
+		}
+		
 		productoService.save(productoActual);
 	}
-	
-	
-	
-	
+
 }

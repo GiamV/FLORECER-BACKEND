@@ -27,6 +27,16 @@ public interface ICabeceraRepository extends JpaRepository<CabeceraVenta, Long> 
 	
 	@Query(value= "{call consultacabv()}",nativeQuery=true)
 	List<CabeceraVenta> ListCabV();
+	@Query(value= "{call consultacabpendiente()}",nativeQuery=true)
+	List<CabeceraVenta> ListCabPendiente();
+	
+	@Query(value= "{call consultacabtodos()}",nativeQuery=true)
+	List<CabeceraVenta> ListCabTodos();
+	
+	@Query(value= "{call consultarventames()}",nativeQuery=true)
+	List<Object> ConsultaVentas();
+	@Query(value= "{call contarventames()}",nativeQuery=true)
+	List<Object> ContarVentas();
 
 }
 

@@ -14,15 +14,15 @@ public interface IGuiaEntradaRepository extends JpaRepository<GuiaEntrada, Long>
 	// @Query(value= "{call registrar_cab(:xcoduser)}",nativeQuery=true)
 	// CabeceraVenta saveCabe(@Param("xcoduser")Long xcoduser);
 	
-	//@Query(value= "{call consultar_cab(:xcoduser)}",nativeQuery=true)
-	//GuiaEntrada getCabeidUser(@Param("xcoduser")Long xcoduser);
+	@Query(value= "{call consultaGuiavalidar(:xcoduser)}",nativeQuery=true)
+	GuiaEntrada getCabeidUser(@Param("xcoduser")Long xcoduser);
 	
 	 @Query(value="{call GuiaHecha (:xcodguia,:xcoduser)}",nativeQuery=true)
 	 void CompraGuia(@Param("xcodguia")Long xcodguia,@Param("xcoduser")Long xcoduser);
 	
-	// @Query(value= "{call consultaventa(:xcoduser)}",nativeQuery=true)
-	//List<CabeceraVenta> findByUV(@Param("xcoduser")Long xcoduser);
-	
+	@Query(value= "{call consultarguiacompra()}",nativeQuery=true)
+	List<GuiaEntrada> guiaEntradaPendiente();
+
 	//@Query(value= "{call consultacabv()}",nativeQuery=true)
 	// List<CabeceraVenta> ListCabV();
 
