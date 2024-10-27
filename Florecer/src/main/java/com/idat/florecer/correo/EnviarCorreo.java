@@ -72,7 +72,7 @@ public class EnviarCorreo {
 		}
 
 		email.setTo(correo);
-		email.setFrom("ln72885231@idat.edu.pe");
+		email.setFrom("giamargvilla@gmail.com");
 		email.setSubject("FACTURACIÓN FLORECER");
 		String Mensaje = "Gracias por su compra\nEstos son los detalles de su compra:\n";
 		Double total = 0.0;
@@ -121,8 +121,8 @@ public class EnviarCorreo {
 		MimeMessage message = mail.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 		helper.setSubject("Información importante");
-		helper.setTo("giam24villa@gmail.com");
-		helper.setFrom("ln72885231@idat.edu.pe");
+		helper.setTo(correo);
+		helper.setFrom("ln72885231@idat.pe");
 
 		List<DetalleVenta> listaDetalle = detalleService.findAll();
 		ArrayList<DetalleVenta> ListaCarrito = new ArrayList<DetalleVenta>();
