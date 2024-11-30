@@ -50,6 +50,7 @@ public class proveedorController {
 				proveedorActual.setNombreComercial(proveedor.getNombreComercial());
 				proveedorActual.setDescripcion(proveedor.getDescripcion());
 				proveedorActual.setEstado(proveedor.getEstado());
+				proveedorActual.setImagen(proveedor.getImagen());
 				
 				provService.save(proveedorActual);
 				return provService .findById(id);	

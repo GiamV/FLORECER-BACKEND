@@ -1,7 +1,10 @@
 
 package com.idat.laterraza.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import com.idat.florecer.LaTerrazaSApplication;
 import com.idat.florecer.dao.ITipoPagoDao;
 import com.idat.florecer.entity.TipoPago;
  
-@DataJpaTest
-@AutoConfigureTestDatabase(replace=Replace.NONE)
+@SpringBootTest(classes = LaTerrazaSApplication.class) // Especifica la clase principal de la aplicación
 public class TipoPagoJpaTest {
 
     private static TipoPago objtipopago;
@@ -47,16 +51,16 @@ public class TipoPagoJpaTest {
     
     @Test 
     public void findAllTest(){
-        Iterable<TipoPago> categoria = tipopagoService.findAll();
-        assertNotNull(categoria);
+        Iterable<TipoPago> tipopago = tipopagoService.findAll();
+        assertNotNull(tipopago);
     }
     
     
     @Test 
     public void findById(){
         long id=1;
-        Optional<TipoPago> categoria = tipopagoService.findById(id);
-        assertNotNull(categoria);
+        Optional<TipoPago> tipopago = tipopagoService.findById(id);
+        assertNotNull(tipopago);
     }
     
     @Test 
@@ -70,25 +74,43 @@ public class TipoPagoJpaTest {
         assertNotNull(detalle);
     }
     
-    @Test 
+    @Test
     @Rollback(false)
-    public void updateTest(){  
-        
-        objtipopago.setIdTipoPago(Long.valueOf(1));
-        objtipopago.setTipoPago("efectivo");
+    public void updateTest() {
+        TipoPago tipoPago = new TipoPago();
+        tipoPago.setTipoPago("efectivo");
+        tipoPago = tipopagoService.save(tipoPago);
+        assertNotNull(tipoPago);
 
-        TipoPago detalle = tipopagoService.save(objtipopago);
-        assertNotNull(detalle);
+        Optional<TipoPago> optionalTipoPago = tipopagoService.findById(tipoPago.getIdTipoPago());
+        assertTrue(optionalTipoPago.isPresent());
+
+        TipoPago tipoPagoExistente = optionalTipoPago.get();
+
+        tipoPagoExistente.setTipoPago("tarjeta");
+
+        TipoPago tipoPagoActualizado = tipopagoService.save(tipoPagoExistente);
+
+        assertNotNull(tipoPagoActualizado);
+        assertEquals("tarjeta", tipoPagoActualizado.getTipoPago());
     }
 
-    @Test 
-    @Rollback(false)
-    public void deleteTest(){  
-        
-        objtipopago.setIdTipoPago(Long.valueOf(1));
-        objtipopago.setTipoPago("efectivo");
 
-        TipoPago detalle = tipopagoService.save(objtipopago);
-        assertNotNull(detalle);
-    }    
+    @Test
+    @Rollback(false)
+    public void deleteTest() {
+        // Paso 1: Crear y guardar un TipoPago en la base de datos
+        TipoPago tipoPago = new TipoPago();
+        tipoPago.setTipoPago("efectivo");
+        tipoPago = tipopagoService.save(tipoPago);
+        assertNotNull(tipoPago);
+
+        // Paso 2: Eliminar el TipoPago
+        tipopagoService.deleteById(tipoPago.getIdTipoPago());
+
+        // Paso 3: Verificar que el TipoPago fue eliminado
+        Optional<TipoPago> optionalTipoPago = tipopagoService.findById(tipoPago.getIdTipoPago());
+        assertFalse(optionalTipoPago.isPresent());
+    }
+ 
 }
